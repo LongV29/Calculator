@@ -12,36 +12,36 @@ function Calculater() {
   const handleInput = (e) => {
     const innerText = e.target.innerText;
     if (e.target.className === "buttons") return;
-    if (innerText === '=') {
-      dispatch(displayResult(eval(inputValue)))
-      return;
-    }
-    if (innerText === 'AC') {
-      if (!inputValue) return;
-      dispatch(deleteInputValue(inputValue))
-      return;
-    }
-    if (innerText === 'History') {
-      dispatch(handleHistory())
-      return;
-    } else {
-      const lastInput = inputValue.slice(-1)
+    switch (innerText) {
+      case '=':
+        dispatch(displayResult(eval(inputValue)))
+        break;
+      case 'AC':
+        if (!inputValue) return;
+        dispatch(deleteInputValue(inputValue))
+        break;
+      case 'History':
+        dispatch(handleHistory())
+        break;
+      default:
+        const lastInput = inputValue.slice(-1)
 
-      if ((innerText ==='%'
-      || innerText === '*'
-      || innerText === '/')
-      && (lastInput === '+'
-      || lastInput ==='-'
-      || lastInput ==='%'
-      || lastInput === '*'
-      || lastInput === '/')
-      ) {
-        return;
-      }
-      if ((innerText ==='+') && (lastInput === '+')) return;
-      if ((innerText ==='-') && (lastInput === '-')) return;
-      
-      dispatch(addInputValue(innerText))
+        if ((innerText ==='%'
+        || innerText === '*'
+        || innerText === '/')
+        && (lastInput === '+'
+        || lastInput ==='-'
+        || lastInput ==='%'
+        || lastInput === '*'
+        || lastInput === '/')
+        ) {
+          return;
+        }
+        if ((innerText ==='+') && (lastInput === '+')) return;
+        if ((innerText ==='-') && (lastInput === '-')) return;
+        
+        dispatch(addInputValue(innerText))
+        break;
     }
   }
 
